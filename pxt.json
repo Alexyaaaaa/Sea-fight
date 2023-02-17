@@ -7,7 +7,9 @@
         "animation": "*",
         "arcade-character-animations": "github:microsoft/arcade-character-animations#v0.0.2",
         "Sprite Grid": "github:microsoft/arcade-grid#v1.3.0",
-        "arcade-text": "github:microsoft/arcade-text#v1.3.0"
+        "arcade-text": "github:microsoft/arcade-text#v1.3.0",
+        "color-coded-tilemap": "*",
+        "arcade-sprite-data": "github:microsoft/arcade-sprite-data#v0.2.1"
     },
     "files": [
         "main.blocks",
