@@ -135,10 +135,110 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
         `)
     tiles.setCurrentTilemap(tilemap`niveau1`)
+    foood = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . c c c c c c . . . . . . . 
+        . . c c 5 5 5 5 5 c . . . . . . 
+        . c 5 5 5 5 5 5 5 5 c . . . . . 
+        . c 5 5 5 b b b b b b c . . . . 
+        . . c c b b 1 b b b b c . . . . 
+        . . . c 1 1 1 b b 1 1 c . . . . 
+        . . . c 1 1 1 b 1 1 1 1 c . . . 
+        c c b b 1 1 1 b 1 1 1 1 c . . . 
+        c 5 5 5 1 b 1 b 1 1 1 d c c . . 
+        c 5 b b 1 b 1 1 1 c 1 d c c . . 
+        c 5 b f 1 b 1 1 1 1 1 d d c c . 
+        c c . f b b b 1 1 1 1 1 d d d f 
+        . . f 5 5 5 b b 1 1 1 f f f f f 
+        . . f 5 5 5 5 5 f f f . . . . . 
+        . . f f f f f f . . . . . . . . 
+        `, SpriteKind.Food)
+    animation.runImageAnimation(
+    foood,
+    [img`
+        . . . . . . . . . . . . . . . . 
+        . . . c c c c c c . . . . . . . 
+        . . c c 5 5 5 5 5 c . . . . . . 
+        . c 5 5 5 5 5 5 5 5 c . . . . . 
+        . c 5 5 5 b b b b b b c . . . . 
+        . . c c b b 1 b b b b c . . . . 
+        . . . c 1 1 1 b b 1 1 c . . . . 
+        . . . c 1 1 1 b 1 1 1 1 c . . . 
+        c c b b 1 1 1 b 1 1 1 1 c . . . 
+        c 5 5 5 1 b 1 b 1 1 1 d c c . . 
+        c 5 b b 1 b 1 1 1 c 1 d c c . . 
+        c 5 b f 1 b 1 1 1 1 1 d d c c . 
+        c c . f b b b 1 1 1 1 1 d d d f 
+        . . f 5 5 5 b b 1 1 1 f f f f f 
+        . . f 5 5 5 5 5 f f f . . . . . 
+        . . f f f f f f . . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . c c c c c . . . . . . . . 
+        . . c 5 5 5 5 5 c c . . . . . . 
+        . c 5 5 5 5 5 5 5 5 c . . . . . 
+        . c 5 5 5 b b b b b b c . . . . 
+        . . c c b b 1 b b 1 1 c . . . . 
+        . . . c 1 1 1 b b 1 1 1 c . . . 
+        c c . c 1 1 1 b 1 1 1 1 c . . . 
+        c 5 b b 1 1 1 b 1 1 1 d c . . . 
+        c 5 5 5 1 b 1 b 1 c 1 d c c . . 
+        c 5 b b 1 b 1 1 1 1 1 d d c c . 
+        c c . f 1 b b 1 1 1 1 1 d d d f 
+        . . . f b b b 1 1 1 1 1 1 f f f 
+        . . f 5 5 b b b 1 1 1 f f . . . 
+        . . f 5 5 5 5 5 f f f . . . . . 
+        . . f f f f f f . . . . . . . . 
+        `,img`
+        . . c c c c c . . . . . . . . . 
+        . c c 5 5 5 5 c c c . . . . . . 
+        . c 5 5 5 5 5 5 5 5 c c . . . . 
+        . c 5 5 5 b b b b b b c . . . . 
+        . . c c b b 1 b b 1 1 1 c . . . 
+        c c . c 1 1 1 b 1 1 1 1 c . . . 
+        c 5 b c 1 1 1 b 1 1 1 d c . . . 
+        c 5 b b 1 1 1 b 1 c 1 d c c . . 
+        c 5 5 5 1 b 1 b 1 1 1 d d c c c 
+        c c b b 1 b 1 1 1 1 1 1 d d d f 
+        . . . f 1 b b 1 1 1 1 1 1 f f . 
+        . . . f b b b 1 1 1 1 1 f . . . 
+        . . . f 5 5 b b 1 1 f f . . . . 
+        . . . f 5 5 5 5 5 f . . . . . . 
+        . . . f f f f f f . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `,img`
+        . . . c c c c c . . . . . . . . 
+        . . c 5 5 5 5 5 c c . . . . . . 
+        . c 5 5 5 5 5 5 5 5 c . . . . . 
+        . c 5 5 5 b b b b b b c . . . . 
+        . . c c b b 1 b b 1 1 c . . . . 
+        . . . c 1 1 1 b b 1 1 1 c . . . 
+        c c . c 1 1 1 b 1 1 1 1 c . . . 
+        c 5 b b 1 1 1 b 1 1 1 d c . . . 
+        c 5 5 5 1 b 1 b 1 c 1 d c c . . 
+        c 5 b b 1 b 1 1 1 1 1 d d c c . 
+        c c . f 1 b b 1 1 1 1 1 d d d f 
+        . . . f b b b 1 1 1 1 1 1 f f f 
+        . . f 5 5 b b b 1 1 1 f f . . . 
+        . . f 5 5 5 5 5 f f f . . . . . 
+        . . f f f f f f . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `],
+    200,
+    true
+    )
 })
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
     info.changeLifeBy(-1)
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Player, function (sprite, otherSprite) {
+	
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
+    info.changeScoreBy(10)
+    sprites.destroy(otherSprite)
+})
+let foood: Sprite = null
 let Score = 0
 let mySprite: Sprite = null
 let textSprite: TextSprite = null
@@ -268,3 +368,195 @@ textSprite = textsprite.create("Sea Fight 2")
 textSprite.setMaxFontHeight(10)
 textSprite.setPosition(75, 50)
 textSprite.setOutline(1, 15)
+game.onUpdateInterval(2000, function () {
+    foood = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . c c c c c c . . . . . . . 
+        . . c c 5 5 5 5 5 c . . . . . . 
+        . c 5 5 5 5 5 5 5 5 c . . . . . 
+        . c 5 5 5 b b b b b b c . . . . 
+        . . c c b b 1 b b b b c . . . . 
+        . . . c 1 1 1 b b 1 1 c . . . . 
+        . . . c 1 1 1 b 1 1 1 1 c . . . 
+        c c b b 1 1 1 b 1 1 1 1 c . . . 
+        c 5 5 5 1 b 1 b 1 1 1 d c c . . 
+        c 5 b b 1 b 1 1 1 c 1 d c c . . 
+        c 5 b f 1 b 1 1 1 1 1 d d c c . 
+        c c . f b b b 1 1 1 1 1 d d d f 
+        . . f 5 5 5 b b 1 1 1 f f f f f 
+        . . f 5 5 5 5 5 f f f . . . . . 
+        . . f f f f f f . . . . . . . . 
+        `, SpriteKind.Food)
+    animation.runImageAnimation(
+    foood,
+    [img`
+        . . . . . . . . . . . . . . . . 
+        . . . c c c c c c . . . . . . . 
+        . . c c 5 5 5 5 5 c . . . . . . 
+        . c 5 5 5 5 5 5 5 5 c . . . . . 
+        . c 5 5 5 b b b b b b c . . . . 
+        . . c c b b 1 b b b b c . . . . 
+        . . . c 1 1 1 b b 1 1 c . . . . 
+        . . . c 1 1 1 b 1 1 1 1 c . . . 
+        c c b b 1 1 1 b 1 1 1 1 c . . . 
+        c 5 5 5 1 b 1 b 1 1 1 d c c . . 
+        c 5 b b 1 b 1 1 1 c 1 d c c . . 
+        c 5 b f 1 b 1 1 1 1 1 d d c c . 
+        c c . f b b b 1 1 1 1 1 d d d f 
+        . . f 5 5 5 b b 1 1 1 f f f f f 
+        . . f 5 5 5 5 5 f f f . . . . . 
+        . . f f f f f f . . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . c c c c c . . . . . . . . 
+        . . c 5 5 5 5 5 c c . . . . . . 
+        . c 5 5 5 5 5 5 5 5 c . . . . . 
+        . c 5 5 5 b b b b b b c . . . . 
+        . . c c b b 1 b b 1 1 c . . . . 
+        . . . c 1 1 1 b b 1 1 1 c . . . 
+        c c . c 1 1 1 b 1 1 1 1 c . . . 
+        c 5 b b 1 1 1 b 1 1 1 d c . . . 
+        c 5 5 5 1 b 1 b 1 c 1 d c c . . 
+        c 5 b b 1 b 1 1 1 1 1 d d c c . 
+        c c . f 1 b b 1 1 1 1 1 d d d f 
+        . . . f b b b 1 1 1 1 1 1 f f f 
+        . . f 5 5 b b b 1 1 1 f f . . . 
+        . . f 5 5 5 5 5 f f f . . . . . 
+        . . f f f f f f . . . . . . . . 
+        `,img`
+        . . c c c c c . . . . . . . . . 
+        . c c 5 5 5 5 c c c . . . . . . 
+        . c 5 5 5 5 5 5 5 5 c c . . . . 
+        . c 5 5 5 b b b b b b c . . . . 
+        . . c c b b 1 b b 1 1 1 c . . . 
+        c c . c 1 1 1 b 1 1 1 1 c . . . 
+        c 5 b c 1 1 1 b 1 1 1 d c . . . 
+        c 5 b b 1 1 1 b 1 c 1 d c c . . 
+        c 5 5 5 1 b 1 b 1 1 1 d d c c c 
+        c c b b 1 b 1 1 1 1 1 1 d d d f 
+        . . . f 1 b b 1 1 1 1 1 1 f f . 
+        . . . f b b b 1 1 1 1 1 f . . . 
+        . . . f 5 5 b b 1 1 f f . . . . 
+        . . . f 5 5 5 5 5 f . . . . . . 
+        . . . f f f f f f . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `,img`
+        . . . c c c c c . . . . . . . . 
+        . . c 5 5 5 5 5 c c . . . . . . 
+        . c 5 5 5 5 5 5 5 5 c . . . . . 
+        . c 5 5 5 b b b b b b c . . . . 
+        . . c c b b 1 b b 1 1 c . . . . 
+        . . . c 1 1 1 b b 1 1 1 c . . . 
+        c c . c 1 1 1 b 1 1 1 1 c . . . 
+        c 5 b b 1 1 1 b 1 1 1 d c . . . 
+        c 5 5 5 1 b 1 b 1 c 1 d c c . . 
+        c 5 b b 1 b 1 1 1 1 1 d d c c . 
+        c c . f 1 b b 1 1 1 1 1 d d d f 
+        . . . f b b b 1 1 1 1 1 1 f f f 
+        . . f 5 5 b b b 1 1 1 f f . . . 
+        . . f 5 5 5 5 5 f f f . . . . . 
+        . . f f f f f f . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `],
+    200,
+    true
+    )
+    foood.setPosition(randint(50, 175), randint(10, 150))
+    foood.setVelocity(81, randint(0, 100))
+    foood.setFlag(SpriteFlag.BounceOnWall, true)
+    foood = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . c c c c . . . . . . . . 
+        . . . c d d d d c c . . . . . . 
+        . . . c d c c c c c c . . . . . 
+        . . . c c d 4 4 4 4 c c . . . . 
+        c c . c 1 4 4 4 4 4 d 4 c . . . 
+        c 4 c 1 d 4 4 4 4 1 4 4 4 c . . 
+        c 4 c 1 4 4 4 4 4 1 4 4 4 4 c . 
+        f 4 4 1 4 4 4 4 4 1 4 4 4 4 4 f 
+        f 4 f 1 4 4 4 c c 1 4 f 4 4 4 f 
+        f 4 f d 4 4 f 4 4 1 4 4 4 4 4 f 
+        f f f f d 4 f 4 c 1 4 4 4 4 f . 
+        . . c f c 4 f f 4 4 d 4 f f . . 
+        . . c b d c 4 4 4 4 f f . . . . 
+        . . c d d d f f f f . . . . . . 
+        . . . c c c . . . . . . . . . . 
+        `, SpriteKind.Food)
+    animation.runImageAnimation(
+    foood,
+    [img`
+        . . . . . . . . . . . . . . . . 
+        . . . . c c c c . . . . . . . . 
+        . . . c d d d d c c . . . . . . 
+        . . . c d c c c c c c . . . . . 
+        . . . c c d 4 4 4 4 c c . . . . 
+        c c . c 1 4 4 4 4 4 d 4 c . . . 
+        c 4 c 1 d 4 4 4 4 1 4 4 4 c . . 
+        c 4 c 1 4 4 4 4 4 1 4 4 4 4 c . 
+        f 4 4 1 4 4 4 4 4 1 4 4 4 4 4 f 
+        f 4 f 1 4 4 4 c c 1 4 f 4 4 4 f 
+        f 4 f d 4 4 f 4 4 1 4 4 4 4 4 f 
+        f f f f d 4 f 4 c 1 4 4 4 4 f . 
+        . . c f c 4 f f 4 4 d 4 f f . . 
+        . . c b d c 4 4 4 4 f f . . . . 
+        . . c d d d f f f f . . . . . . 
+        . . . c c c . . . . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . c c c c c . . . . . . . 
+        . . . c d d d d d c . . . . . . 
+        . . . c d c c c c c . . . . . . 
+        . . . c c d 4 4 4 4 c . . . . . 
+        . . . c 1 4 4 4 4 4 d c . . . . 
+        . . c 1 4 4 4 4 4 1 4 4 c . . . 
+        c c c 1 4 4 4 4 1 4 4 4 4 c . . 
+        c 4 4 1 4 4 c c 1 4 4 4 4 4 c . 
+        f 4 f 1 4 f 4 4 1 4 4 4 4 4 c . 
+        f 4 f d 4 f 4 c 1 4 f 4 4 4 4 f 
+        f 4 f f 4 f f 4 1 4 4 4 4 4 4 f 
+        f f c b c 4 4 4 4 1 4 4 4 4 f . 
+        . . c d d c 4 4 4 4 d f f f . . 
+        . . . c c c f f f f f . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `,img`
+        . . . . c c c c . . . . . . . . 
+        . . . c d d d d c c . . . . . . 
+        . . . c d c c c c c c . . . . . 
+        c c . c c d 4 4 4 4 c c . . . . 
+        c 4 c c 1 4 4 4 4 4 d 4 c . . . 
+        f 4 c 1 d 4 4 4 4 1 4 4 4 c . . 
+        f 4 4 1 4 4 4 4 4 1 4 4 4 4 c . 
+        f 4 f 1 4 4 f c 1 1 4 4 4 4 4 f 
+        f 4 f 1 4 4 f 4 c 1 4 f 4 4 4 f 
+        f f f d 4 4 f 4 4 1 4 4 4 4 4 f 
+        . . f f d 4 4 c c 1 4 4 4 4 f . 
+        . . . f c 4 4 4 4 4 d 4 f f . . 
+        . . c b d c 4 4 4 4 f f . . . . 
+        . . c d d d f f f f . . . . . . 
+        . . . c c c . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . c c c c . . . . . . . . . 
+        . . c d d d d c c . . . . . . . 
+        . . c d d c c c c c c . . . . . 
+        c c c c c d 4 4 4 4 c c c . . . 
+        f 4 c c 1 4 4 4 4 4 1 4 4 c . . 
+        f 4 f 1 d 4 4 4 4 1 4 4 4 4 c . 
+        f 4 f 1 4 4 4 4 4 1 4 4 4 4 4 f 
+        f 4 4 1 4 4 f c 4 1 4 4 f 4 4 f 
+        f f f 1 4 4 f 4 c 1 4 4 4 4 4 f 
+        . . f d 4 4 f 4 4 1 4 4 4 4 f . 
+        . . . f d 4 4 c c 4 1 4 4 f . . 
+        . . . f c 4 4 4 4 4 4 d f . . . 
+        . . c b d c 4 4 4 4 f f . . . . 
+        . . c d d d f f f f . . . . . . 
+        . . . c c c . . . . . . . . . . 
+        `],
+    200,
+    true
+    )
+    foood.setVelocity(85, randint(0, 100))
+    foood.setPosition(randint(10, 200), randint(10, 200))
+    foood.setFlag(SpriteFlag.BounceOnWall, true)
+})
