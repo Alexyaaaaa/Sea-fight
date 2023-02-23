@@ -234,6 +234,14 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSp
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Player, function (sprite, otherSprite) {
 	
 })
+info.onLifeZero(function () {
+    game.gameOver(false)
+    game.setGameOverMessage(false, "GAME OVER!")
+})
+info.onScore(500, function () {
+    game.gameOver(true)
+    game.setGameOverEffect(true, effects.bubbles)
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     info.changeScoreBy(10)
     sprites.destroy(otherSprite)
