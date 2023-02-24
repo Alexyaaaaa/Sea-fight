@@ -1,14 +1,15 @@
-namespace SpriteKind {
-    export const background = SpriteKind.create()
-}
+@namespace
+class SpriteKind:
+    background = SpriteKind.create()
 
-sprites.onDestroyed(SpriteKind.Food, function on_on_destroyed(sprite: Sprite) {
+def on_on_destroyed(sprite):
     pause(2000)
     genererFoood()
-})
-function genererFoood() {
-    
-    foood = sprites.create(img`
+sprites.on_destroyed(SpriteKind.food, on_on_destroyed)
+
+def genererFoood():
+    global foood
+    foood = sprites.create(img("""
             . . . . . . . . . . . . . . . . 
                     . . . c c c c c c . . . . . . . 
                     . . c c 5 5 5 5 5 c . . . . . . 
@@ -25,8 +26,10 @@ function genererFoood() {
                     . . f 5 5 5 b b 1 1 1 f f f f f 
                     . . f 5 5 5 5 5 f f f . . . . . 
                     . . f f f f f f . . . . . . . .
-        `, SpriteKind.Food)
-    animation.runImageAnimation(foood, [img`
+        """),
+        SpriteKind.food)
+    animation.run_image_animation(foood,
+        [img("""
                 . . . . . . . . . . . . . . . . 
                         . . . c c c c c c . . . . . . . 
                         . . c c 5 5 5 5 5 c . . . . . . 
@@ -43,7 +46,8 @@ function genererFoood() {
                         . . f 5 5 5 b b 1 1 1 f f f f f 
                         . . f 5 5 5 5 5 f f f . . . . . 
                         . . f f f f f f . . . . . . . .
-            `, img`
+            """),
+            img("""
                 . . . . . . . . . . . . . . . . 
                         . . . c c c c c . . . . . . . . 
                         . . c 5 5 5 5 5 c c . . . . . . 
@@ -60,7 +64,8 @@ function genererFoood() {
                         . . f 5 5 b b b 1 1 1 f f . . . 
                         . . f 5 5 5 5 5 f f f . . . . . 
                         . . f f f f f f . . . . . . . .
-            `, img`
+            """),
+            img("""
                 . . c c c c c . . . . . . . . . 
                         . c c 5 5 5 5 c c c . . . . . . 
                         . c 5 5 5 5 5 5 5 5 c c . . . . 
@@ -77,7 +82,8 @@ function genererFoood() {
                         . . . f 5 5 5 5 5 f . . . . . . 
                         . . . f f f f f f . . . . . . . 
                         . . . . . . . . . . . . . . . .
-            `, img`
+            """),
+            img("""
                 . . . c c c c c . . . . . . . . 
                         . . c 5 5 5 5 5 c c . . . . . . 
                         . c 5 5 5 5 5 5 5 5 c . . . . . 
@@ -94,30 +100,32 @@ function genererFoood() {
                         . . f 5 5 5 5 5 f f f . . . . . 
                         . . f f f f f f . . . . . . . . 
                         . . . . . . . . . . . . . . . .
-            `], 200, true)
-    foood.setPosition(173, randint(40, 100))
-    foood.setVelocity(randint(-1, -5), 0)
-    foood.setFlag(SpriteFlag.BounceOnWall, true)
-}
+            """)],
+        200,
+        True)
+    foood.set_position(173, randint(40, 100))
+    foood.set_velocity(randint(-1, -5), 0)
+    foood.set_flag(SpriteFlag.BOUNCE_ON_WALL, True)
 
-sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function on_on_overlap(sprite2: Sprite, otherSprite: Sprite) {
-    info.changeLifeBy(-1)
-})
-controller.A.onEvent(ControllerButtonEvent.Pressed, function on_a_pressed() {
-    
+def on_on_overlap(sprite2, otherSprite):
+    info.change_life_by(-1)
+sprites.on_overlap(SpriteKind.enemy, SpriteKind.player, on_on_overlap)
+
+def on_a_pressed():
+    global mySprite, Score
     sprites.destroy(textSprite)
-    mySprite = sprites.create(assets.image`
+    mySprite = sprites.create(assets.image("""
         YellowSubmarine
-    `, SpriteKind.Player)
+    """), SpriteKind.player)
     Score = 0
-    info.setScore(0)
-    info.setLife(3)
-    mySprite.setScale(1, ScaleAnchor.Middle)
-    controller.moveSprite(mySprite, 100, 100)
-    mySprite.setPosition(76, 57)
-    scene.cameraFollowSprite(mySprite)
-    scroller.scrollBackgroundWithCamera(scroller.CameraScrollMode.OnlyHorizontal)
-    scene.setBackgroundImage(img`
+    info.set_score(0)
+    info.set_life(3)
+    mySprite.set_scale(1, ScaleAnchor.MIDDLE)
+    controller.move_sprite(mySprite, 100, 100)
+    mySprite.set_position(76, 57)
+    scene.camera_follow_sprite(mySprite)
+    scroller.scroll_background_with_camera(scroller.CameraScrollMode.ONLY_HORIZONTAL)
+    scene.set_background_image(img("""
         ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
                 ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
                 ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
@@ -238,32 +246,36 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function on_a_pressed() {
                 ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
                 ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
                 ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-    `)
-    tiles.setCurrentTilemap(tilemap`niveau1`)
-    for (let index = 0; index < 4; index++) {
+    """))
+    tiles.set_current_tilemap(tilemap("""niveau1"""))
+    for index in range(4):
         genererFoood()
-    }
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Player, function on_on_overlap2(sprite22: Sprite, otherSprite2: Sprite) {
-    
-})
-info.onLifeZero(function on_life_zero() {
-    game.gameOver(false)
-    game.setGameOverMessage(false, "GAME OVER!")
-})
-info.onScore(500, function on_on_score() {
-    game.gameOver(true)
-    game.setGameOverEffect(true, effects.bubbles)
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function on_on_overlap3(sprite3: Sprite, otherSprite3: Sprite) {
-    info.changeScoreBy(10)
+controller.A.on_event(ControllerButtonEvent.PRESSED, on_a_pressed)
+
+def on_on_overlap2(sprite22, otherSprite2):
+    pass
+sprites.on_overlap(SpriteKind.player, SpriteKind.player, on_on_overlap2)
+
+def on_life_zero():
+    game.game_over(False)
+    game.set_game_over_message(False, "GAME OVER!")
+info.on_life_zero(on_life_zero)
+
+def on_on_score():
+    game.game_over(True)
+    game.set_game_over_effect(True, effects.bubbles)
+info.on_score(500, on_on_score)
+
+def on_on_overlap3(sprite3, otherSprite3):
+    info.change_score_by(10)
     sprites.destroy(otherSprite3)
-})
-let Score = 0
-let mySprite : Sprite = null
-let foood : Sprite = null
-let textSprite : TextSprite = null
-scene.setBackgroundImage(img`
+sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap3)
+
+Score = 0
+mySprite: Sprite = None
+foood: Sprite = None
+textSprite: TextSprite = None
+scene.set_background_image(img("""
     8fffffffffffffffffffffffff88fffff88ffff8998889999999989988888989999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
     ffffffffffffffffffffffffff8fffff88ff9f88889889999999989998888898999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
     fffffffffffffffffffffffff8fffff889ff9988888988999989998999888889899999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -384,8 +396,8 @@ scene.setBackgroundImage(img`
     66ccccccccccccc66665cccccccccccccccccccc666cccc6444444ccc6cccccbb6666566666666f6666fffffffff66666666666666666cccccccccccccccccccccccccccccc666cccccccccccccc66cc
     6cccccccccccccc66666ccccccccccccccccccc6666cccc6644bccccccccccccc8666666666666f66666ffffffff666666666666666666ccccccccccccccccccccccccccccccccccccccccccccccccc8
     6cccccccccccccc66666ccccccccccccccccccc666ccccc6666ccccccccccccccf666666666666ff6666ffffffff6666666666666666666ccccccccccccccc6cccccccccccccccccccccccccccccccc8
-`)
+"""))
 textSprite = textsprite.create("Sea Fight 2")
-textSprite.setMaxFontHeight(10)
-textSprite.setPosition(75, 50)
-textSprite.setOutline(1, 15)
+textSprite.set_max_font_height(10)
+textSprite.set_position(75, 50)
+textSprite.set_outline(1, 15)

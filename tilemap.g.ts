@@ -57,7 +57,7 @@ namespace myTiles {
 2.............................................................................................................................................................................2
 2.............................................................................................................................................................................2
 2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
-`, [myTiles.transparency16,sprites.builtin.oceanSand2,sprites.builtin.oceanSand1,sprites.builtin.oceanSand13,sprites.builtin.oceanSand14,myTiles.tile2,myTiles.tile3,myTiles.tile4,myTiles.tile5,myTiles.tile6,myTiles.tile7,myTiles.tile8,myTiles.tile10,myTiles.tile11,myTiles.tile12,myTiles.tile13,myTiles.tile14,myTiles.tile15,myTiles.tile16,myTiles.tile1], TileScale.Sixteen);
+`, [myTiles.transparency16,sprites.builtin.oceanSand2,sprites.builtin.oceanSand1,sprites.builtin.oceanSand13,sprites.builtin.oceanSand14,myTiles.tile2,myTiles.tile3,myTiles.tile4,myTiles.tile5,myTiles.tile6,myTiles.tile7,myTiles.tile8,myTiles.tile10,myTiles.tile11,myTiles.tile12,myTiles.tile13,myTiles.tile14,myTiles.tile15,myTiles.tile16], TileScale.Sixteen);
         }
         return null;
     })
