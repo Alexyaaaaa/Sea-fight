@@ -1,143 +1,22 @@
+enum ActionKind {
+    Walking,
+    Idle,
+    Jumping,
+    swim
+}
 namespace SpriteKind {
     export const background = SpriteKind.create()
 }
-sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Enemy, function (sprite, otherSprite) {
-    info.changeLifeBy(-1)
-})
-controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    projectile2 = sprites.createProjectileFromSprite(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . 2 2 2 2 2 2 2 2 2 2 2 2 . . 
-        . . 3 3 3 3 3 3 3 3 3 3 3 3 . . 
-        . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
-        . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
-        . . 3 3 3 3 3 3 3 3 3 3 3 3 . . 
-        . . 2 2 2 2 2 2 2 2 2 2 2 2 . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, mySprite, 100, 0)
-    animation.runImageAnimation(
-    projectile2,
-    [img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . 2 2 2 2 2 2 2 2 2 2 2 2 . . 
-        . . 3 3 3 3 3 3 3 3 3 3 3 3 . . 
-        . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
-        . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
-        . . 3 3 3 3 3 3 3 3 3 3 3 3 . . 
-        . . 2 2 2 2 2 2 2 2 2 2 2 2 . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `,img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . 2 2 2 2 2 2 2 2 2 2 2 2 . . 
-        . . 3 3 3 3 3 3 3 3 3 3 3 3 . . 
-        . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
-        . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
-        . . 3 3 3 3 3 3 3 3 3 3 3 3 . . 
-        . . 2 2 2 2 2 2 2 2 2 2 2 2 . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `,img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . 2 2 2 2 2 2 2 2 2 2 2 2 . . 
-        . . 3 3 3 3 3 3 3 3 3 3 3 3 . . 
-        . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
-        . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
-        . . 3 3 3 3 3 3 3 3 3 3 3 3 . . 
-        . . 2 2 2 2 2 2 2 2 2 2 2 2 . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `,img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . 2 2 2 2 . . . 
-        . . . . . . . 2 2 1 1 1 1 2 . . 
-        . . . . 2 2 3 3 1 1 1 1 1 1 . . 
-        . . 3 3 3 3 1 1 1 1 1 1 1 1 . . 
-        . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
-        . . 3 3 2 2 3 1 1 1 1 1 1 1 . . 
-        . . . . . . 2 2 3 1 1 1 1 2 . . 
-        . . . . . . . . . 2 2 2 2 . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `,img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . 1 1 3 . . . . . . 
-        . . . . . . 1 3 . 3 3 . . . . . 
-        . . . . . . 1 . . . 3 2 2 3 . . 
-        . . . . . 1 3 . . . 2 2 1 3 3 . 
-        . . . . . 1 3 . 2 2 3 1 1 1 3 . 
-        . . 2 2 2 1 3 3 3 3 3 1 1 1 3 . 
-        . . 1 1 1 1 3 1 1 1 1 1 1 1 3 . 
-        . . 2 2 2 1 3 3 3 3 3 1 1 1 3 . 
-        . . . . . 1 3 . 2 2 3 1 1 1 3 . 
-        . . . . . 1 3 . . . 2 2 1 3 3 . 
-        . . . . . . 1 . . . 3 2 2 3 . . 
-        . . . . . . 1 3 . 3 3 . . . . . 
-        . . . . . . . 1 1 3 . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `,img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . 3 3 . . . 3 . . . . . 
-        . . . . 3 3 . . . . 3 3 . . . . 
-        . . . . 3 . . . . . . 3 3 . . . 
-        . . . . . . . . . . . . 3 . . . 
-        . . . . . . . . . . . . . . . . 
-        . . 3 . . . . . . . . . . . . . 
-        . . 3 . . . . . . . . . . 3 . . 
-        . . 3 . . . . . . . . . . 3 . . 
-        . . . . . . . . . . . . . 3 . . 
-        . . . . . . . . . . . . . . . . 
-        . . . 3 . . . . . . . . . . . . 
-        . . . 3 3 . . . . . . 3 . . . . 
-        . . . . 3 3 . . . . 3 3 . . . . 
-        . . . . . . . . . 3 3 . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `],
-    100,
-    false
-    )
+info.onScore(1000, function () {
+    game.gameOver(true)
+    game.setGameOverEffect(true, effects.bubbles)
 })
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     sprites.destroy(textSprite)
     mySprite = sprites.create(assets.image`YellowSubmarine`, SpriteKind.Player)
     Score = 0
     info.setScore(0)
-    info.setLife(3)
+    info.setLife(1)
     mySprite.setScale(1, ScaleAnchor.Middle)
     controller.moveSprite(mySprite, 100, 100)
     mySprite.setPosition(76, 57)
@@ -358,121 +237,25 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     200,
     true
     )
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Player, function (sprite, otherSprite) {
-	
+    EnemyJellyFish = sprites.create(assets.image`JellyFish2`, SpriteKind.Enemy)
+    EnemyJellyFish.setPosition(154, 112)
 })
 info.onLifeZero(function () {
     game.gameOver(false)
     game.setGameOverMessage(false, "GAME OVER!")
-})
-info.onScore(500, function () {
-    info.changeScoreBy(1)
-    mySprite2 = sprites.create(img`
-        ...........fffffff...ccfff..........
-        ..........fbbbbbbbffcbbbbf..........
-        ..........fbb111bbbbbffbf...........
-        ..........fb11111ffbbbbff...........
-        ..........f1cccc1ffbbbbbcff.........
-        ..........ffc1c1c1bbcbcbcccf........
-        ...........fcc3331bbbcbcbcccf..ccccc
-        ............c333c1bbbcbcbccccfcddbbc
-        ............c333c1bbbbbbbcccccddbcc.
-        ............c333c11bbbbbccccccbbcc..
-        ...........cc331c11bbbbccccccfbccf..
-        ...........cc13c11cbbbcccccbbcfccf..
-        ...........c111111cbbbfdddddc.fbbcf.
-        ............cc1111fbdbbfdddc...fbbf.
-        ..............cccfffbdbbfcc.....fbbf
-        ....................fffff........fff
-        `, SpriteKind.Enemy)
-    animation.runImageAnimation(
-    mySprite2,
-    [img`
-        .............ccfff..............
-        ...........ccddbcf..............
-        ..........ccddbbf...............
-        ..........fccbbcf...............
-        .....fffffccccccff.........ccc..
-        ...ffbbbbbbbcbbbbcfff....ccbbc..
-        ..fbbbbbbbbcbcbbbbcccff.cdbbc...
-        ffbbbbbbffbbcbcbbbcccccfcdbbf...
-        fbcbbb11ff1bcbbbbbcccccffbbf....
-        fbbb11111111bbbbbcccccccbbcf....
-        .fb11133cc11bbbbcccccccccccf....
-        ..fccc31c111bbbcccccbdbffbbcf...
-        ...fc13c111cbbbfcddddcc..fbbf...
-        ....fccc111fbdbbccdcc.....fbbf..
-        ........ccccfcdbbcc........fff..
-        .............fffff..............
-        `,img`
-        .............ccfff..............
-        ............cddbbf..............
-        ...........cddbbf...............
-        ..........fccbbcf............ccc
-        ....ffffffccccccff.........ccbbc
-        ..ffbbbbbbbbbbbbbcfff.....cdbbc.
-        ffbbbbbbbbbcbcbbbbcccff..cddbbf.
-        fbcbbbbbffbbcbcbbbcccccfffdbbf..
-        fbbb1111ff1bcbcbbbcccccccbbbcf..
-        .fb11111111bbbbbbcccccccccbccf..
-        ..fccc33cc11bbbbccccccccfffbbcf.
-        ...fc131c111bbbcccccbdbc...fbbf.
-        ....f33c111cbbbfdddddcc.....fbbf
-        .....ff1111fbdbbfddcc........fff
-        .......cccccfbdbbfc.............
-        .............fffff..............
-        `,img`
-        ..............cfff..............
-        ............ccddbf..............
-        ...........cbddbff.........ccc..
-        ..........fccbbcf.........cbbc..
-        ...fffffffccccccff.......cdbc...
-        .ffcbbbbbbbbbbbbbcfff....cdbf...
-        fcbbbbbbbbbcbbbbbbcccff.cdbf....
-        fbcbbbbffbbbcbcbbbcccccffdcf....
-        fbb1111ffbbbcbcbbbccccccbbcf....
-        .fb11111111bbcbbbccccccccbbcf...
-        ..fccc33cb11bbbbcccccccfffbbf...
-        ...fc131c111bbbcccccbdbc..fbbf..
-        ....f33c111cbbccdddddbc....fff..
-        .....ff1111fdbbccddbcc..........
-        .......cccccfdbbbfcc............
-        .............fffff..............
-        `,img`
-        .............ccfff..............
-        ............cddbbf..............
-        ...........cddbbf...............
-        ..........fccbbcf............ccc
-        ....ffffffccccccff.........ccbbc
-        ..ffbbbbbbbbbbbbbcfff.....cdbbc.
-        ffbbbbbbbbbcbcbbbbcccff..cddbbf.
-        fbcbbbbbffbbcbcbbbcccccfffdbbf..
-        fbbb1111ff1bcbcbbbcccccccbbbcf..
-        .fb11111111bbbbbbcccccccccbccf..
-        ..fccc33cc11bbbbccccccccfffbbcf.
-        ...fc131c111bbbcccccbdbc...fbbf.
-        ....f33c111cbbbfdddddcc.....fbbf
-        .....ff1111fbdbbfddcc........fff
-        .......cccccfbdbbfc.............
-        .............fffff..............
-        `],
-    200,
-    true
-    )
-    grid.place(mySprite2, tiles.getTileLocation(160, 8))
-    mySprite2.setScale(3, ScaleAnchor.TopRight)
-    mySprite2.setVelocity(-100, 0)
+    game.setGameOverEffect(false, effects.slash)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
-    info.changeScoreBy(100)
+    info.changeScoreBy(10)
     sprites.destroy(otherSprite)
 })
-let mySprite2: Sprite = null
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
+    info.changeLifeBy(-1)
+})
+let EnemyJellyFish: Sprite = null
 let foood: Sprite = null
 let Score = 0
 let mySprite: Sprite = null
-let projectile2: Sprite = null
 let textSprite: TextSprite = null
 scene.setBackgroundImage(img`
     8fffffffffffffffffffffffff88fffff88ffff8998889999999989988888989999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -596,17 +379,12 @@ scene.setBackgroundImage(img`
     6cccccccccccccc66666ccccccccccccccccccc6666cccc6644bccccccccccccc8666666666666f66666ffffffff666666666666666666ccccccccccccccccccccccccccccccccccccccccccccccccc8
     6cccccccccccccc66666ccccccccccccccccccc666ccccc6666ccccccccccccccf666666666666ff6666ffffffff6666666666666666666ccccccccccccccc6cccccccccccccccccccccccccccccccc8
     `)
-textSprite = textsprite.create("Sea Fight 2")
+textSprite = textsprite.create("Sea Fight")
 textSprite.setMaxFontHeight(10)
 textSprite.setPosition(75, 50)
 textSprite.setOutline(1, 15)
-game.onUpdate(function () {
-    if (Score == 500) {
-    	
-    }
-})
 game.onUpdateInterval(2000, function () {
-    if (info.score() > 0 && info.score() < 500) {
+    if (info.score() > 0 && info.score() < 1000) {
         foood = sprites.create(img`
             . . . . . . . . . . . . . . . . 
             . . . c c c c c c . . . . . . . 
@@ -800,4 +578,7 @@ game.onUpdateInterval(2000, function () {
     } else {
         sprites.destroyAllSpritesOfKind(SpriteKind.Food)
     }
+})
+game.onUpdateInterval(500, function () {
+    tiles.placeOnRandomTile(EnemyJellyFish, assets.tile`myTile0`)
 })
