@@ -1,82 +1,32 @@
-class ActionKind {
-    static Walking: number
-    private ___Walking_is_set: boolean
-    private ___Walking: number
-    get Walking(): number {
-        return this.___Walking_is_set ? this.___Walking : ActionKind.Walking
-    }
-    set Walking(value: number) {
-        this.___Walking_is_set = true
-        this.___Walking = value
-    }
-    
-    static Idle: number
-    private ___Idle_is_set: boolean
-    private ___Idle: number
-    get Idle(): number {
-        return this.___Idle_is_set ? this.___Idle : ActionKind.Idle
-    }
-    set Idle(value: number) {
-        this.___Idle_is_set = true
-        this.___Idle = value
-    }
-    
-    static Jumping: number
-    private ___Jumping_is_set: boolean
-    private ___Jumping: number
-    get Jumping(): number {
-        return this.___Jumping_is_set ? this.___Jumping : ActionKind.Jumping
-    }
-    set Jumping(value: number) {
-        this.___Jumping_is_set = true
-        this.___Jumping = value
-    }
-    
-    static swim: number
-    private ___swim_is_set: boolean
-    private ___swim: number
-    get swim(): number {
-        return this.___swim_is_set ? this.___swim : ActionKind.swim
-    }
-    set swim(value: number) {
-        this.___swim_is_set = true
-        this.___swim = value
-    }
-    
-    public static __initActionKind() {
-        ActionKind.Walking = 0
-        ActionKind.Idle = 1
-        ActionKind.Jumping = 2
-        ActionKind.swim = 3
-    }
-    
-}
+class ActionKind(Enum):
+    Walking = 0
+    Idle = 1
+    Jumping = 2
+    swim = 3
+@namespace
+class SpriteKind:
+    background = SpriteKind.create()
 
-ActionKind.__initActionKind()
+def on_on_score():
+    game.game_over(True)
+    game.set_game_over_effect(True, effects.bubbles)
+info.on_score(1000, on_on_score)
 
-namespace SpriteKind {
-    export const background = SpriteKind.create()
-}
-
-info.onScore(1000, function on_on_score() {
-    game.gameOver(true)
-    game.setGameOverEffect(true, effects.bubbles)
-})
-controller.B.onEvent(ControllerButtonEvent.Pressed, function on_b_pressed() {
-    
+def on_b_pressed():
+    global mySprite, Score, foood, EnemyJellyFish, myEnemy
     sprites.destroy(textSprite)
-    mySprite = sprites.create(assets.image`
+    mySprite = sprites.create(assets.image("""
         YellowSubmarine
-    `, SpriteKind.Player)
+    """), SpriteKind.player)
     Score = 0
-    info.setScore(0)
-    info.setLife(1)
-    mySprite.setScale(1, ScaleAnchor.Middle)
-    controller.moveSprite(mySprite, 100, 100)
-    mySprite.setPosition(76, 57)
-    scene.cameraFollowSprite(mySprite)
-    scroller.scrollBackgroundWithCamera(scroller.CameraScrollMode.OnlyHorizontal)
-    scene.setBackgroundImage(img`
+    info.set_score(0)
+    info.set_life(1)
+    mySprite.set_scale(1, ScaleAnchor.MIDDLE)
+    controller.move_sprite(mySprite, 100, 100)
+    mySprite.set_position(76, 57)
+    scene.camera_follow_sprite(mySprite)
+    scroller.scroll_background_with_camera(scroller.CameraScrollMode.ONLY_HORIZONTAL)
+    scene.set_background_image(img("""
         ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
                 ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
                 ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
@@ -197,11 +147,11 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function on_b_pressed() {
                 ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
                 ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
                 ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-    `)
-    tiles.setCurrentTilemap(tilemap`
+    """))
+    tiles.set_current_tilemap(tilemap("""
         niveau1
-    `)
-    foood = sprites.create(img`
+    """))
+    foood = sprites.create(img("""
             . . . . . . . . . . . . . . . . 
                     . . . c c c c c c . . . . . . . 
                     . . c c 5 5 5 5 5 c . . . . . . 
@@ -218,8 +168,10 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function on_b_pressed() {
                     . . f 5 5 5 b b 1 1 1 f f f f f 
                     . . f 5 5 5 5 5 f f f . . . . . 
                     . . f f f f f f . . . . . . . .
-        `, SpriteKind.Food)
-    animation.runImageAnimation(foood, [img`
+        """),
+        SpriteKind.food)
+    animation.run_image_animation(foood,
+        [img("""
                 . . . . . . . . . . . . . . . . 
                         . . . c c c c c c . . . . . . . 
                         . . c c 5 5 5 5 5 c . . . . . . 
@@ -236,7 +188,8 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function on_b_pressed() {
                         . . f 5 5 5 b b 1 1 1 f f f f f 
                         . . f 5 5 5 5 5 f f f . . . . . 
                         . . f f f f f f . . . . . . . .
-            `, img`
+            """),
+            img("""
                 . . . . . . . . . . . . . . . . 
                         . . . c c c c c . . . . . . . . 
                         . . c 5 5 5 5 5 c c . . . . . . 
@@ -253,7 +206,8 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function on_b_pressed() {
                         . . f 5 5 b b b 1 1 1 f f . . . 
                         . . f 5 5 5 5 5 f f f . . . . . 
                         . . f f f f f f . . . . . . . .
-            `, img`
+            """),
+            img("""
                 . . c c c c c . . . . . . . . . 
                         . c c 5 5 5 5 c c c . . . . . . 
                         . c 5 5 5 5 5 5 5 5 c c . . . . 
@@ -270,7 +224,8 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function on_b_pressed() {
                         . . . f 5 5 5 5 5 f . . . . . . 
                         . . . f f f f f f . . . . . . . 
                         . . . . . . . . . . . . . . . .
-            `, img`
+            """),
+            img("""
                 . . . c c c c c . . . . . . . . 
                         . . c 5 5 5 5 5 c c . . . . . . 
                         . c 5 5 5 5 5 5 5 5 c . . . . . 
@@ -287,35 +242,41 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function on_b_pressed() {
                         . . f 5 5 5 5 5 f f f . . . . . 
                         . . f f f f f f . . . . . . . . 
                         . . . . . . . . . . . . . . . .
-            `], 200, true)
-    EnemyJellyFish = sprites.create(assets.image`
+            """)],
+        200,
+        True)
+    EnemyJellyFish = sprites.create(assets.image("""
         JellyFish2
-    `, SpriteKind.Enemy)
-    myEnemy = sprites.create(assets.image`
+    """), SpriteKind.enemy)
+    myEnemy = sprites.create(assets.image("""
         JellyFish1
-    `, SpriteKind.Player)
-    EnemyJellyFish.setPosition(152, 113)
-    myEnemy.setPosition(154, -1)
-})
-info.onLifeZero(function on_life_zero() {
-    game.gameOver(false)
-    game.setGameOverMessage(false, "GAME OVER!")
-    game.setGameOverEffect(false, effects.slash)
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function on_on_overlap(sprite: Sprite, otherSprite: Sprite) {
-    info.changeScoreBy(10)
+    """), SpriteKind.player)
+    EnemyJellyFish.set_position(152, 113)
+    myEnemy.set_position(154, -1)
+controller.B.on_event(ControllerButtonEvent.PRESSED, on_b_pressed)
+
+def on_life_zero():
+    game.game_over(False)
+    game.set_game_over_message(False, "GAME OVER!")
+    game.set_game_over_effect(False, effects.slash)
+info.on_life_zero(on_life_zero)
+
+def on_on_overlap(sprite, otherSprite):
+    info.change_score_by(10)
     sprites.destroy(otherSprite)
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function on_on_overlap2(sprite2: Sprite, otherSprite2: Sprite) {
-    info.changeLifeBy(-1)
-})
-let myEnemy : Sprite = null
-let EnemyJellyFish : Sprite = null
-let foood : Sprite = null
-let Score = 0
-let mySprite : Sprite = null
-let textSprite : TextSprite = null
-scene.setBackgroundImage(img`
+sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap)
+
+def on_on_overlap2(sprite2, otherSprite2):
+    info.change_life_by(-1)
+sprites.on_overlap(SpriteKind.player, SpriteKind.enemy, on_on_overlap2)
+
+myEnemy: Sprite = None
+EnemyJellyFish: Sprite = None
+foood: Sprite = None
+Score = 0
+mySprite: Sprite = None
+textSprite: TextSprite = None
+scene.set_background_image(img("""
     8fffffffffffffffffffffffff88fffff88ffff8998889999999989988888989999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
         ffffffffffffffffffffffffff8fffff88ff9f88889889999999989998888898999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
         fffffffffffffffffffffffff8fffff889ff9988888988999989998999888889899999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -436,23 +397,25 @@ scene.setBackgroundImage(img`
         66ccccccccccccc66665cccccccccccccccccccc666cccc6444444ccc6cccccbb6666566666666f6666fffffffff66666666666666666cccccccccccccccccccccccccccccc666cccccccccccccc66cc
         6cccccccccccccc66666ccccccccccccccccccc6666cccc6644bccccccccccccc8666666666666f66666ffffffff666666666666666666ccccccccccccccccccccccccccccccccccccccccccccccccc8
         6cccccccccccccc66666ccccccccccccccccccc666ccccc6666ccccccccccccccf666666666666ff6666ffffffff6666666666666666666ccccccccccccccc6cccccccccccccccccccccccccccccccc8
-`)
+"""))
 textSprite = textsprite.create("Sea Fight")
-textSprite.setMaxFontHeight(10)
-textSprite.setPosition(75, 50)
-textSprite.setOutline(1, 15)
-game.onUpdateInterval(5000, function on_update_interval() {
-    tiles.placeOnRandomTile(EnemyJellyFish, assets.tile`
+textSprite.set_max_font_height(10)
+textSprite.set_position(75, 50)
+textSprite.set_outline(1, 15)
+
+def on_update_interval():
+    tiles.place_on_random_tile(EnemyJellyFish, assets.tile("""
         myTile0
-    `)
-    tiles.placeOnRandomTile(myEnemy, assets.tile`
+    """))
+    tiles.place_on_random_tile(myEnemy, assets.tile("""
         myTile0
-    `)
-})
-game.onUpdateInterval(2000, function on_update_interval2() {
-    
-    if (info.score() > 0 && info.score() < 1000) {
-        foood = sprites.create(img`
+    """))
+game.on_update_interval(5000, on_update_interval)
+
+def on_update_interval2():
+    global foood
+    if info.score() > 0 and info.score() < 1000:
+        foood = sprites.create(img("""
                 . . . . . . . . . . . . . . . . 
                             . . . c c c c c c . . . . . . . 
                             . . c c 5 5 5 5 5 c . . . . . . 
@@ -469,8 +432,10 @@ game.onUpdateInterval(2000, function on_update_interval2() {
                             . . f 5 5 5 b b 1 1 1 f f f f f 
                             . . f 5 5 5 5 5 f f f . . . . . 
                             . . f f f f f f . . . . . . . .
-            `, SpriteKind.Food)
-        animation.runImageAnimation(foood, [img`
+            """),
+            SpriteKind.food)
+        animation.run_image_animation(foood,
+            [img("""
                     . . . . . . . . . . . . . . . . 
                                 . . . c c c c c c . . . . . . . 
                                 . . c c 5 5 5 5 5 c . . . . . . 
@@ -487,7 +452,8 @@ game.onUpdateInterval(2000, function on_update_interval2() {
                                 . . f 5 5 5 b b 1 1 1 f f f f f 
                                 . . f 5 5 5 5 5 f f f . . . . . 
                                 . . f f f f f f . . . . . . . .
-                `, img`
+                """),
+                img("""
                     . . . . . . . . . . . . . . . . 
                                 . . . c c c c c . . . . . . . . 
                                 . . c 5 5 5 5 5 c c . . . . . . 
@@ -504,7 +470,8 @@ game.onUpdateInterval(2000, function on_update_interval2() {
                                 . . f 5 5 b b b 1 1 1 f f . . . 
                                 . . f 5 5 5 5 5 f f f . . . . . 
                                 . . f f f f f f . . . . . . . .
-                `, img`
+                """),
+                img("""
                     . . c c c c c . . . . . . . . . 
                                 . c c 5 5 5 5 c c c . . . . . . 
                                 . c 5 5 5 5 5 5 5 5 c c . . . . 
@@ -521,7 +488,8 @@ game.onUpdateInterval(2000, function on_update_interval2() {
                                 . . . f 5 5 5 5 5 f . . . . . . 
                                 . . . f f f f f f . . . . . . . 
                                 . . . . . . . . . . . . . . . .
-                `, img`
+                """),
+                img("""
                     . . . c c c c c . . . . . . . . 
                                 . . c 5 5 5 5 5 c c . . . . . . 
                                 . c 5 5 5 5 5 5 5 5 c . . . . . 
@@ -538,11 +506,13 @@ game.onUpdateInterval(2000, function on_update_interval2() {
                                 . . f 5 5 5 5 5 f f f . . . . . 
                                 . . f f f f f f . . . . . . . . 
                                 . . . . . . . . . . . . . . . .
-                `], 200, true)
-        foood.setPosition(randint(50, 175), randint(10, 150))
-        foood.setVelocity(81, randint(0, 100))
-        foood.setFlag(SpriteFlag.BounceOnWall, true)
-        foood = sprites.create(img`
+                """)],
+            200,
+            True)
+        foood.set_position(randint(50, 175), randint(10, 150))
+        foood.set_velocity(81, randint(0, 100))
+        foood.set_flag(SpriteFlag.BOUNCE_ON_WALL, True)
+        foood = sprites.create(img("""
                 . . . . . . . . . . . . . . . . 
                             . . . . c c c c . . . . . . . . 
                             . . . c d d d d c c . . . . . . 
@@ -559,8 +529,10 @@ game.onUpdateInterval(2000, function on_update_interval2() {
                             . . c b d c 4 4 4 4 f f . . . . 
                             . . c d d d f f f f . . . . . . 
                             . . . c c c . . . . . . . . . .
-            `, SpriteKind.Food)
-        animation.runImageAnimation(foood, [img`
+            """),
+            SpriteKind.food)
+        animation.run_image_animation(foood,
+            [img("""
                     . . . . . . . . . . . . . . . . 
                                 . . . . c c c c . . . . . . . . 
                                 . . . c d d d d c c . . . . . . 
@@ -577,7 +549,8 @@ game.onUpdateInterval(2000, function on_update_interval2() {
                                 . . c b d c 4 4 4 4 f f . . . . 
                                 . . c d d d f f f f . . . . . . 
                                 . . . c c c . . . . . . . . . .
-                `, img`
+                """),
+                img("""
                     . . . . . . . . . . . . . . . . 
                                 . . . . c c c c c . . . . . . . 
                                 . . . c d d d d d c . . . . . . 
@@ -594,7 +567,8 @@ game.onUpdateInterval(2000, function on_update_interval2() {
                                 . . c d d c 4 4 4 4 d f f f . . 
                                 . . . c c c f f f f f . . . . . 
                                 . . . . . . . . . . . . . . . .
-                `, img`
+                """),
+                img("""
                     . . . . c c c c . . . . . . . . 
                                 . . . c d d d d c c . . . . . . 
                                 . . . c d c c c c c c . . . . . 
@@ -611,7 +585,8 @@ game.onUpdateInterval(2000, function on_update_interval2() {
                                 . . c d d d f f f f . . . . . . 
                                 . . . c c c . . . . . . . . . . 
                                 . . . . . . . . . . . . . . . .
-                `, img`
+                """),
+                img("""
                     . . . . . . . . . . . . . . . . 
                                 . . . c c c c . . . . . . . . . 
                                 . . c d d d d c c . . . . . . . 
@@ -628,17 +603,18 @@ game.onUpdateInterval(2000, function on_update_interval2() {
                                 . . c b d c 4 4 4 4 f f . . . . 
                                 . . c d d d f f f f . . . . . . 
                                 . . . c c c . . . . . . . . . .
-                `], 200, true)
-        foood.setVelocity(85, randint(0, 100))
-        foood.setPosition(randint(10, 200), randint(10, 200))
-        foood.setFlag(SpriteFlag.BounceOnWall, true)
-    } else {
-        sprites.destroyAllSpritesOfKind(SpriteKind.Food)
-    }
-    
-})
-game.onUpdateInterval(500, function on_update_interval3() {
-    tiles.placeOnRandomTile(EnemyJellyFish, assets.tile`
+                """)],
+            200,
+            True)
+        foood.set_velocity(85, randint(0, 100))
+        foood.set_position(randint(10, 200), randint(10, 200))
+        foood.set_flag(SpriteFlag.BOUNCE_ON_WALL, True)
+    else:
+        sprites.destroy_all_sprites_of_kind(SpriteKind.food)
+game.on_update_interval(2000, on_update_interval2)
+
+def on_update_interval3():
+    tiles.place_on_random_tile(EnemyJellyFish, assets.tile("""
         myTile0
-    `)
-})
+    """))
+game.on_update_interval(500, on_update_interval3)
