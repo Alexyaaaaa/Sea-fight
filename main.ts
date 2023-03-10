@@ -383,6 +383,9 @@ textSprite = textsprite.create("Sea Fight")
 textSprite.setMaxFontHeight(10)
 textSprite.setPosition(75, 50)
 textSprite.setOutline(1, 15)
+game.onUpdateInterval(5000, function () {
+    tiles.placeOnRandomTile(EnemyJellyFish, assets.tile`myTile0`)
+})
 game.onUpdateInterval(2000, function () {
     if (info.score() > 0 && info.score() < 1000) {
         foood = sprites.create(img`
@@ -578,7 +581,4 @@ game.onUpdateInterval(2000, function () {
     } else {
         sprites.destroyAllSpritesOfKind(SpriteKind.Food)
     }
-})
-game.onUpdateInterval(500, function () {
-    tiles.placeOnRandomTile(EnemyJellyFish, assets.tile`myTile0`)
 })
